@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Blog.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="body" class="container">
+    <div class="row">
+        <div class="col-md-8">
+
+            <h2>Index</h2>
+            <p>The .table-striped class adds zebra-stripes to a table:</p>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table table-striped">
+
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tittle)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Content)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatorId)
+                    </th>
+                    <th></th>
+                </tr>
+
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tittle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatorId)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@*<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Tittle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatorId)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tittle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatorId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+            </td>
+        </tr>
+    }*@
+
+</table>
