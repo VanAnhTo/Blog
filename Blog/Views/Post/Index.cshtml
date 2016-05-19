@@ -8,102 +8,134 @@
     <div class="row">
         <div class="col-md-8">
 
-            <h2>Index</h2>
-            <p>The .table-striped class adds zebra-stripes to a table:</p>
+            <h1>Latest post</h1>
+            @*<p>The .table-striped class adds zebra-stripes to a table:</p>
             <p>
                 @Html.ActionLink("Create New", "Create")
-            </p>
-            <table class="table table-striped">
+            </p>*@
 
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Tittle)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Content)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreatedDate)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CreatorId)
-                    </th>
-                    <th></th>
-                </tr>
+            @foreach (var item in Model)
+            {
 
+                <article>
+                    <h2>@Html.ActionLink(@item.Tittle, "Details", new { id = item.PostId })</h2>
+                    <div class="row">
+                        <div class="group1 col-md-6">
+                            <span class="glyphicon glyphicon-user"></span> CreatorID: @item.CreatorId
+                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate
+                        </div>
+                    </div>
+                    <br />
+                    <p class="test">@item.Content</p>
+                    <br />
+                    <p class="text-right">
+                        <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
+                    </p>
+                    <hr>
+                </article>
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tittle)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Content)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatedDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreatorId)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
-                        </td>
-                    </tr>
-                }
-
-
-            </table>
-
+            }
 
         </div>
+
+        <div class="col-md-4">
+            <!-- Subscribe to my feed widget -->
+            <div class="well text-center">
+                <p class="lead">
+                    Don't want to miss updates? Please click the below button!
+                </p>
+                <button class="btn btn-primary btn-lg">Subscribe to my feed</button>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Latest Posts</h4>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item">@Html.ActionLink(@item.Tittle, "Details", new { id = item.PostId })</li>
+                    </ul>
+                }
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Categories</h4>
+                </div>
+                @foreach (var item in Model)
+                {
+                    <ul class="list-group">
+                        <li class="list-group-item"><a href="#">@item.CategoryId</a></li>
+                    </ul>
+                }
+            </div>
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Tags</h4>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-inline">
+                        <li><a href="#">Aries</a></li>
+                        <li><a href="#">Fire</a></li>
+                        <li><a href="#">Mars</a></li>
+                        <li><a href="#">Taurus</a></li>
+                        <li><a href="#">Earth</a></li>
+                        <li><a href="#">Moon</a></li>
+                        <li><a href="#">Gemini</a></li>
+                        <li><a href="#">Air</a></li>
+                        <li><a href="#">Mercury</a></li>
+                        <li><a href="#">Cancer</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>
 
 
-
 @*<table class="table">
-    <tr>
-
-        <th>
-            @Html.DisplayNameFor(model => model.Tittle)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatorId)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tittle)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Content)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatorId)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
-            </td>
-        </tr>
-    }*@
 
-</table>
+            <th>
+                @Html.DisplayNameFor(model => model.Tittle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatorId)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tittle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatorId)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+                </td>
+            </tr>
+        }
+
+    </table>*@
