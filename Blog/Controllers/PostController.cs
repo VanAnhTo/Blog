@@ -24,7 +24,7 @@ namespace Blog.Controllers
         private IList<Post> allPost = new List<Post>();
 
         // GET: /Post/
-        public ActionResult Index(int page = 1)
+        public ActionResult Index(int page = 0)
         {
             const int pageSize = 3; // you can always do something more elegant to set this
             var count = blog.Posts.Count();
