@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Blog.Models.LatestPosts>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item"> @Html.ActionLink(@item.Tittle , "Details", new { id = item.PostId }) @item.CreatedDate.ToString("dd/MM/yyyy") </li>
+            
+    }
+</ul>

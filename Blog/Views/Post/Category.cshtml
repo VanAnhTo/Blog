@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blog.Models.UserCreatedPost>
+﻿@model IEnumerable<Blog.Post>
 
 @{
     ViewBag.Title = "Index";
@@ -21,8 +21,8 @@
                     <h2>@Html.ActionLink(@item.Tittle, "Details", new { id = item.PostId })</h2>
                     <div class="row">
                         <div class="group1 col-md-6">
-                            <span class="glyphicon glyphicon-user"></span> @item.UserName  &emsp;
-                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate.ToString("dd/MM/yyyy")
+                            <span class="glyphicon glyphicon-user"></span> @item.CreatorId
+                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate
                         </div>
                     </div>
                     <br />
@@ -38,33 +38,7 @@
 
         </div>
 
-        <ul class="pagination">
-            <li><a href="#">&laquo;</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">&raquo;</a></li>
-        </ul>
-            
-
-        @if (ViewBag.Page > 0)
-        {
-            <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
-               class="btn btn-default">
-                &laquo; Prev
-            </a>
-        }
-        @if (ViewBag.Page < ViewBag.MaxPage)
-        {
-            <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
-               class="btn btn-default">
-                Next &raquo;
-            </a>
-        }
-
-
+        
 
     </div>
 </div>

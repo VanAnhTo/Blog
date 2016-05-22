@@ -6,43 +6,65 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Post</h4>
-	<hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Tittle)
-        </dt>
+<div id="body" class="container">
+    <div class="row">
+        <div class="col-md-12">
 
-        <dd>
-            @Html.DisplayFor(model => model.Tittle)
-        </dd>
+            <div class="row">
+                <div class="group1 col-md-8">
+                    <span class="glyphicon glyphicon-user"></span> CreatorID: @Html.DisplayFor(model => model.CreatorId) 
+                    <span class="glyphicon glyphicon-time"></span> @Html.DisplayFor(model => model.CreatedDate)
+                </div>
+            </div>
+            <br />
+            
+            
+            <p class="test">@Html.DisplayFor(model => model.Content)</p>
 
-        <dt>
-            <p class="test">@Html.DisplayNameFor(model => model.Content)</p>
-        </dt>
+            <hr>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatorId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatorId)
-        </dd>
+            @*<h4>Post</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Tittle)
+                </dt>
 
-    </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.Tittle)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Content)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Content)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatedDate)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreatorId)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CreatorId)
+                </dd>
+
+            </dl>*@
+        </div>
+    </div>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.PostId }) |

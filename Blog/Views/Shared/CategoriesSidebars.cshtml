@@ -1,0 +1,9 @@
+﻿@model IEnumerable<Blog.Models.CategoriesSidebar>
+
+<ul class="list-group">
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item"> @Html.ActionLink(@item.CategoryName, "PostsByCategory", new { categoryId = item.CategoryId, take = 10 })</li>
+    }
+</ul>
+
