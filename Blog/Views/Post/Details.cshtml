@@ -1,10 +1,8 @@
-﻿@model Blog.Post
+﻿@model Blog.Models.UserCreatedPost
 
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
 
 <div id="body" class="container">
     <div class="row">
@@ -12,57 +10,28 @@
 
             <div class="row">
                 <div class="group1 col-md-8">
-                    <span class="glyphicon glyphicon-user"></span> CreatorID: @Html.DisplayFor(model => model.CreatorId) 
-                    <span class="glyphicon glyphicon-time"></span> @Html.DisplayFor(model => model.CreatedDate)
+                    <h2>@Model.Tittle</h2>
+                    <span class="glyphicon glyphicon-user"></span> @Model.UserName &emsp;
+                    <span class="glyphicon glyphicon-time"></span> @Model.CreatedDate.ToString("dd/MM/yyyy")
                 </div>
             </div>
             <br />
-            
-            
-            <p class="test">@Html.DisplayFor(model => model.Content)</p>
+            <p class="test">@Model.Content</p>
 
-            <hr>
+            <hr>                          
 
+            <ul id="comments" class="comments">
+                <li class="comment">
+                    <div class="clearfix">
+                        <h4 class="pull-left">@Model.UserCommet</h4>
+                        <p class="pull-right">@Model.CommentDate</p>
+                    </div>
+                    <p>
+                        <em>@Model.Comment</em>
+                    </p>
+                </li>
+            </ul>
 
-
-
-
-            @*<h4>Post</h4>
-            <hr />
-            <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Tittle)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Tittle)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.Content)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.Content)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.CreatedDate)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.CreatedDate)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.CreatorId)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.CreatorId)
-                </dd>
-
-            </dl>*@
         </div>
     </div>
 </div>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MvcPaging</id>
+    <version>2.1.5</version>
+    <title>MvcPaging</title>
+    <authors>Martijn Boland, Bart Lenaerts, Rajeesh CV</authors>
+    <owners>Martijn Boland, Bart Lenaerts, Rajeesh CV</owners>
+    <licenseUrl>https://github.com/martijnboland/MvcPaging/wiki/License</licenseUrl>
+    <projectUrl>https://github.com/martijnboland/MvcPaging</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A Paging library for ASP.NET MVC.</description>
+    <summary />
+    <releaseNotes>2.1.5 (2016-05-19)
+- A bug, introduced in 2.1.4, was fixed where the wrong last page number was
+  calculated in some cases. See https://github.com/martijnboland/MvcPaging/pull/54</releaseNotes>
+    <tags>mvc5 mvc4 mvc3 pager asp.net mvc paging</tags>
+  </metadata>
+</package>

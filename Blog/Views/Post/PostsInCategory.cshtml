@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Blog.Post>
+﻿@model IEnumerable<Blog.Models.CategoriesSidebar>
 
 @{
     ViewBag.Title = "Index";
@@ -7,7 +7,10 @@
 <div id="body" class="container">
     <div class="row">
         <div class="col-md-12">
-
+            @foreach (var item in Model)
+            {
+                <h1>@item.CategoryName </h1>
+            }
             @*<p>The .table-striped class adds zebra-stripes to a table:</p>
                 <p>
                     @Html.ActionLink("Create New", "Create")
@@ -17,20 +20,20 @@
             {
 
                 <article>
-                    <h2>@Html.ActionLink(@item.Tittle, "PostsInCategory", new { id = item.PostId })</h2>
-                    @*<div class="row">
-                            <div class="group1 col-md-6">
-                                <span class="glyphicon glyphicon-user"></span> @item.CreatorName
-                                <span class="glyphicon glyphicon-time"></span> @item.CreatedDate
-                            </div>
+                    <h2>@Html.ActionLink(@item.Tittle, "Details", new { id = item.PostId })</h2>
+                    <div class="row">
+                        <div class="group1 col-md-6">
+                            <span class="glyphicon glyphicon-user"></span> @item.CreatorName
+                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate
                         </div>
-                        <br />
-                        <p class="test">@item.Content.Substring(0,200)</p>
-                        <br />
-                        <p class="text-right">
-                            <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
-                        </p>
-                        <hr>*@
+                    </div>
+                    <br />
+                    <p class="test">@item.Content</p>
+                    <br />
+                    <p class="text-right">
+                        <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
+                    </p>
+                    <hr>
                 </article>
 
             }

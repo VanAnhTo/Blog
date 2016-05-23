@@ -12,6 +12,8 @@ namespace Blog.Models
         public string Content { get; set; }
         public int CategoryId { get; set; }
         public int CreatorId { get; set; }
+
+        public string CreatorName { get; set; }
         
         public DateTime CreatedDate { get; set; }
 

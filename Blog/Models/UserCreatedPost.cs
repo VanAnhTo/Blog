@@ -14,6 +14,11 @@ namespace Blog.Models
         public string Content { get; set; }
         public int CategoryId { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        public string Comment { get; set; }
+
+        public int UserCommet { get; set; }
+        public DateTime CommentDate { get; set; }
         
     }
 }

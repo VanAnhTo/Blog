@@ -53,3 +53,8 @@ F:\lol\CSharp\Blog\Blog\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 F:\lol\CSharp\Blog\Blog\obj\Debug\Blog.csprojResolveAssemblyReference.cache
 F:\lol\CSharp\Blog\Blog\obj\Debug\Blog.dll
 F:\lol\CSharp\Blog\Blog\obj\Debug\Blog.pdb
+F:\lol\CSharp\Blog\Blog\bin\MvcPaging.dll
+F:\lol\CSharp\Blog\Blog\bin\PagedList.dll
+F:\lol\CSharp\Blog\Blog\bin\PagedList.Mvc.dll
+F:\lol\CSharp\Blog\Blog\bin\PagedList.xml
+F:\lol\CSharp\Blog\Blog\bin\PagedList.Mvc.xml

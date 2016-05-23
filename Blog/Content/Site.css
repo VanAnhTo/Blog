@@ -44,3 +44,11 @@ input[type="checkbox"].input-validation-error {
 p.test {
     word-wrap: break-word;
 }
+
+#sidebars{
+    margin-top: 30px;
+}
+
+#comments li {
+    list-style: none;
+}

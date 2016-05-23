@@ -28,7 +28,7 @@ namespace Blog.Controllers
         {
             const int pageSize = 3; // you can always do something more elegant to set this
             var count = blog.Posts.Count();
-            
+
             var list = (from d in blog.Posts
                         join b in blog.Users on d.CreatorId equals b.UserId
                         select new UserCreatedPost()
@@ -40,8 +40,14 @@ namespace Blog.Controllers
                               UserName = b.UserName,
                               Content = d.Content
                           }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
+
+            ViewBag.CurrentPage = page;
+            ViewBag.PageSize = pageSize;
+            ViewBag.TotalPages = Math.Ceiling((double)blog.Posts.Count() / pageSize);
+
+            ViewBag.Page = page;
             ViewBag.MaxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
-            ViewBag.Page = page;                  
+
             return View(list);
         }
 
@@ -63,6 +69,26 @@ namespace Blog.Controllers
                           }).Take(10);
             return PartialView("Sidebars", list);
 
+        }
+
+
+        public ActionResult PostsInCategory(int categoryId)
+        {
+
+            var list = (from d in blog.Posts
+                        join b in blog.Categories on d.CategoryId equals b.CategoryId
+                        join u in blog.Users on d.CreatorId equals u.UserId
+                        select new CategoriesSidebar()
+                        {
+                            Content =d.Content,
+                            CreatedDate = d.CreatedDate,
+                            CreatorName = u.UserName,
+                              CategoryId = d.CategoryId,
+                              Tittle = d.Tittle,
+                              PostId = d.PostId,
+                              CategoryName = b.Name
+                        });
+            return View("PostsInCategory", list);
         }
 
         public PartialViewResult DoCategoriesSidebars()
@@ -88,7 +114,24 @@ namespace Blog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-                      Post post = blog.Posts.Find(id);
+
+            var post = (from d in blog.Posts
+                        join b in blog.Users on d.CreatorId equals b.UserId    
+                        join e in blog.Comments on d.PostId equals e.PostId 
+                        select new UserCreatedPost()
+                        {
+                            Tittle =d.Tittle,
+                            CategoryId = d.CategoryId,
+                            Content = d.Content,
+                            CreatedDate =d.CreatedDate,
+                            UserName = b.UserName,
+                            Comment = e.Content,
+                            CommentDate =e.CreatedDate,
+                            UserCommet =e.UserId
+
+                        }).FirstOrDefault();
+
+            //Post post = blog.Posts.Find(id);
             if (post == null)
             {
                 return HttpNotFound();
