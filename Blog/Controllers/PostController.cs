@@ -32,14 +32,14 @@ namespace Blog.Controllers
             var list = (from d in blog.Posts
                         join b in blog.Users on d.CreatorId equals b.UserId
                         select new UserCreatedPost()
-                          {
-                              Tittle = d.Tittle,
-                              CreatedDate = d.CreatedDate,
-                              PostId = d.PostId,
-                              CategoryId = d.CategoryId,
-                              UserName = b.UserName,
-                              Content = d.Content
-                          }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
+                        {
+                            Tittle = d.Tittle,
+                            CreatedDate = d.CreatedDate,
+                            PostId = d.PostId,
+                            CategoryId = d.CategoryId,
+                            UserName = b.UserName,
+                            Content = d.Content
+                        }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
 
             ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
@@ -62,11 +62,11 @@ namespace Blog.Controllers
             //var list = blog.Posts.Take(10).ToList();           
             var list = (from d in blog.Posts
                         select new LatestPosts()
-                          {
-                              Tittle = d.Tittle,
-                              CreatedDate = d.CreatedDate,
-                              PostId = d.PostId
-                          }).Take(10);
+                        {
+                            Tittle = d.Tittle,
+                            CreatedDate = d.CreatedDate,
+                            PostId = d.PostId
+                        }).Take(10);
             return PartialView("Sidebars", list);
 
         }
@@ -78,15 +78,16 @@ namespace Blog.Controllers
             var list = (from d in blog.Posts
                         join b in blog.Categories on d.CategoryId equals b.CategoryId
                         join u in blog.Users on d.CreatorId equals u.UserId
+                        where d.CategoryId == categoryId
                         select new CategoriesSidebar()
                         {
-                            Content =d.Content,
+                            Content = d.Content,
                             CreatedDate = d.CreatedDate,
                             CreatorName = u.UserName,
-                              CategoryId = d.CategoryId,
-                              Tittle = d.Tittle,
-                              PostId = d.PostId,
-                              CategoryName = b.Name
+                            CategoryId = d.CategoryId,
+                            Tittle = d.Tittle,
+                            PostId = d.PostId,
+                            CategoryName = b.Name
                         });
             return View("PostsInCategory", list);
         }
@@ -99,10 +100,10 @@ namespace Blog.Controllers
             var list = (from d in blog.Posts
                         join b in blog.Categories on d.CategoryId equals b.CategoryId
                         select new CategoriesSidebar()
-                          {
-                              CategoryId = d.CategoryId,
-                              CategoryName = b.Name
-                          }).Take(10);
+                        {
+                            CategoryId = d.CategoryId,
+                            CategoryName = b.Name
+                        }).Take(10);
             return PartialView("CategoriesSidebars", list);
 
         }
@@ -116,18 +117,18 @@ namespace Blog.Controllers
             }
 
             var post = (from d in blog.Posts
-                        join b in blog.Users on d.CreatorId equals b.UserId    
-                        join e in blog.Comments on d.PostId equals e.PostId 
+                        join b in blog.Users on d.CreatorId equals b.UserId
+                        join e in blog.Comments on d.PostId equals e.PostId
                         select new UserCreatedPost()
                         {
-                            Tittle =d.Tittle,
+                            Tittle = d.Tittle,
                             CategoryId = d.CategoryId,
                             Content = d.Content,
-                            CreatedDate =d.CreatedDate,
+                            CreatedDate = d.CreatedDate,
                             UserName = b.UserName,
                             Comment = e.Content,
-                            CommentDate =e.CreatedDate,
-                            UserCommet =e.UserId
+                            CommentDate = e.CreatedDate,
+                            UserCommet = e.UserId
 
                         }).FirstOrDefault();
 
