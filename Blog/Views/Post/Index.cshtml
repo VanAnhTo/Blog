@@ -27,7 +27,7 @@
                     </div>
                     <br />
                     <p class="test">@item.Content.Substring(0, 200)</p>
-                    
+
                     <br />
                     <p class="text-right">
                         <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
@@ -42,11 +42,8 @@
         <div class="pagination">
             @for (int i = 1; i <= ViewBag.MaxPage; i++)
             {
-                if (ViewBag.Page == i)
-                {
-                    <a class="@(i==ViewBag.Page ? "" : "") active" 
-                       href="@Url.Action("Index", new { page = i} )">@i</a>
-                }
+                <a class="@(i==ViewBag.Page ? "active" : "")" href="@Url.Action("Index", new { page = i} )">@i</a>
+
             }
         </div>
 
