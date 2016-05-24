@@ -45,10 +45,14 @@ p.test {
     word-wrap: break-word;
 }
 
-#sidebars{
+#sidebars {
     margin-top: 30px;
 }
 
 #comments li {
     list-style: none;
+}
+
+.pagination .active {
+    background: yellow;
 }
