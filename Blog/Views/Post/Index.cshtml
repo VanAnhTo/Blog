@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <br />
-                    <p class="test">@item.Content.Substring(0, 200)</p>
-                    
+                    <p class="test">@item.Content.Substring(0, 100)</p>
+
                     <br />
                     <p class="text-right">
                         <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
@@ -40,31 +40,95 @@
         </div>
 
         <div class="pagination">
-            @for (int i = 1; i <= ViewBag.MaxPage; i++)
-            {
-                if (ViewBag.Page == i)
-                {
-                    <a class="@(i==ViewBag.Page ? "" : "") active" 
-                       href="@Url.Action("Index", new { page = i} )">@i</a>
-                }
-            }
+            @pageLinks()
         </div>
 
+@helper buildLinks(int start, int end, string innerContent)
+{
+    for (int i = start; i <= end; i++)
+    {
+        <a class="@(i == ViewBag.Page ? "active" : "")" href="@Url.Action("Index", new { page = i })">@(innerContent ?? i.ToString())</a>
+    }
+}
 
-        @if (ViewBag.Page > 0)
-        {
-            <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
-               class="btn btn-default">
-                &laquo; Prev
-            </a>
-        }
-        @if (ViewBag.Page < ViewBag.MaxPage)
-        {
-            <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
-               class="btn btn-default">
-                Next &raquo;
-            </a>
-        }
+
+@helper pageLinks()
+{
+    const int maxPages = 11;
+
+    if (ViewBag.MaxPage <= maxPages)
+    {
+        @buildLinks(1, (int)ViewBag.MaxPage, null)
+        return;
+    }
+
+    int pagesAfter = ViewBag.MaxPage - ViewBag.Page; // Number of pages after current
+    int pagesBefore = ViewBag.Page - 1; // Number of pages before current
+
+    if (pagesAfter <= 4)
+    {
+        @buildLinks(1, 1, null) // Show 1st page
+
+        int pageSubset = ViewBag.MaxPage - maxPages - 1 > 1 ? ViewBag.Maxpage - maxPages - 1 : 2;
+        @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+        @buildLinks(ViewBag.MaxPage - maxPages + 3, ViewBag.MaxPage, null) // Show last pages
+
+        return; // Exit
+    }
+
+    if (pagesBefore <= 4)
+    {
+        @buildLinks(1, maxPages - 2, null) // Show 1st pages
+
+
+        int pageSubset = maxPages + 2 < ViewBag.MaxPage ? maxPages + 2 : ViewBag.MaxPage - 1;
+        @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
+        @buildLinks(ViewBag.MaxPage, ViewBag.MaxPage, null) // Show last page
+        return; // Exit
+    }
+
+    if (pagesAfter > 4)
+    {
+        @buildLinks(1, 1, null) // Show 1st pages
+
+        int pageSubset1 = ViewBag.Page - 7 > 1 ? ViewBag.Page - 7 : 2;
+        int pageSubset2 = ViewBag.Page + 7 < ViewBag.MaxPage ? ViewBag.Page + 7 : ViewBag.MaxPage - 1;
+
+        @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.Page - 4 ? null : "...") // Show 1st page subset (...)
+
+        @buildLinks(ViewBag.Page - 3, ViewBag.Page + 3, null) // Show middle pages
+
+        // Show 2nd page subset (...)
+        // only show ... if page is contigous to the previous one.
+        @buildLinks(pageSubset2, pageSubset2, pageSubset2 == ViewBag.Page + 4 ? null : "...")
+        @buildLinks(ViewBag.MaxPage, ViewBag.MaxPage, null) // Show last page
+        return; // Exit
+
+    }
+}
+
+
+
+
+
+
+
+
+
+        @*@if (ViewBag.Page > 0)
+            {
+                <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })"
+                   class="btn btn-default">
+                    &laquo; Prev
+                </a>
+            }
+            @if (ViewBag.Page < ViewBag.MaxPage)
+            {
+                <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })"
+                   class="btn btn-default">
+                    Next &raquo;
+                </a>
+            }*@
 
     </div>
 </div>

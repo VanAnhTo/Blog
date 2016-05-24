@@ -41,9 +41,9 @@ namespace Blog.Controllers
                             Content = d.Content
                         }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
 
-            ViewBag.CurrentPage = page;
+            //ViewBag.CurrentPage = page;
             ViewBag.PageSize = pageSize;
-            ViewBag.TotalPages = Math.Ceiling((double)blog.Posts.Count() / pageSize);
+            //ViewBag.TotalPages = Math.Ceiling((double)blog.Posts.Count() / pageSize);
 
             ViewBag.Page = page;
             ViewBag.MaxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
