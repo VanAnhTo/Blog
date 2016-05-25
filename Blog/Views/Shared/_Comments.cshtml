@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Blog.Models.Comments>
+
+@foreach (var item in Model)
+{
+    <ul id="comments" class="list-group comments">
+        <li class="comment">
+            <div class="clearfix">
+                <h4 class="pull-left">@item.userId</h4>
+                <p class="pull-right">@item.CreatedDate.ToString("dd/MM/yyyy")</p>
+            </div>
+            <p>
+             <em>@item.content</em>
+            </p>
+        </li>
+    </ul>
+
+}
+
+
+
+

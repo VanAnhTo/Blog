@@ -108,6 +108,20 @@ namespace Blog.Controllers
 
         }
 
+        public PartialViewResult ViewComment(int id)
+        {
+            var list = (from d in blog.Comments
+                        where d.PostId == id
+                        select new Comments()
+                        {
+                            content = d.Content,
+                            CreatedDate = d.CreatedDate,
+                            userId = d.UserId
+                        }).Take(10);
+            return PartialView("_Comments", list);
+
+        }
+
         // GET: /Post/Details/5
         public ActionResult Details(int? id)
         {
@@ -118,7 +132,7 @@ namespace Blog.Controllers
 
             var post = (from d in blog.Posts
                         join b in blog.Users on d.CreatorId equals b.UserId
-                        join e in blog.Comments on d.PostId equals e.PostId
+                        where d.PostId == id
                         select new UserCreatedPost()
                         {
                             Tittle = d.Tittle,
@@ -126,10 +140,6 @@ namespace Blog.Controllers
                             Content = d.Content,
                             CreatedDate = d.CreatedDate,
                             UserName = b.UserName,
-                            Comment = e.Content,
-                            CommentDate = e.CreatedDate,
-                            UserCommet = e.UserId
-
                         }).FirstOrDefault();
 
             //Post post = blog.Posts.Find(id);
