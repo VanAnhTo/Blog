@@ -17,20 +17,20 @@
             {
 
                 <article>
-                    <h2>@Html.ActionLink(@item.Tittle, "PostsInCategory", new { id = item.PostId })</h2>
-                    @*<div class="row">
+                    <h2>@Html.ActionLink(@item.Tittle, "Details", new { id = item.PostId })</h2>
+                    <div class="row">
                             <div class="group1 col-md-6">
-                                <span class="glyphicon glyphicon-user"></span> @item.CreatorName
+                                <span class="glyphicon glyphicon-user"></span> @item.User
                                 <span class="glyphicon glyphicon-time"></span> @item.CreatedDate
                             </div>
                         </div>
                         <br />
-                        <p class="test">@item.Content.Substring(0,200)</p>
+                        <p class="test">@item.Content.Substring(0,100)</p>
                         <br />
                         <p class="text-right">
                             <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
                         </p>
-                        <hr>*@
+                        <hr>
                 </article>
 
             }

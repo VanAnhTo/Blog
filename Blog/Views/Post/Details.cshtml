@@ -18,19 +18,14 @@
             <br />
             <p class="test">@Model.Content</p>
 
-            <hr>                          
+            <hr>  
+            
 
-            <ul id="comments" class="comments">
-                <li class="comment">
-                    <div class="clearfix">
-                        <h4 class="pull-left">@Model.UserCommet</h4>
-                        <p class="pull-right">@Model.CommentDate</p>
-                    </div>
-                    <p>
-                        <em>@Model.Comment</em>
-                    </p>
-                </li>
-            </ul>
+            <h4>Leave a comment </h4>
+            <ul>@Html.Action("ViewComment")</ul>
+                                    
+
+            
 
         </div>
     </div>

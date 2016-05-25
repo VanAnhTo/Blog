@@ -202,6 +202,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoriesSidebar.cs" />
+    <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LatestPosts.cs" />
     <Compile Include="Models\Person.cs" />
@@ -297,6 +298,7 @@
     <Content Include="Views\Shared\CategoriesSidebars.cshtml" />
     <Content Include="Views\Post\Category.cshtml" />
     <Content Include="Views\Post\PostsInCategory.cshtml" />
+    <Content Include="Views\Shared\_Comments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
