@@ -24,7 +24,7 @@ namespace Blog.Controllers
         private IList<Post> allPost = new List<Post>();
 
         // GET: /Post/
-        public ActionResult Index(int page = 0)
+        public ActionResult Index(int page = 0, string search = null)
         {
             const int pageSize = 3; // you can always do something more elegant to set this
             var count = blog.Posts.Count();
@@ -41,12 +41,17 @@ namespace Blog.Controllers
                             Content = d.Content
                         }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
 
-            //ViewBag.CurrentPage = page;
-            ViewBag.PageSize = pageSize;
+            IEnumerable<Post> post = blog.Posts.Where(
+                p => search == null
+                || p.Content.Contains(search)
+                || p.Tittle.Contains(search));
+            
+            //ViewBag.CurrentPage = page;           
             //ViewBag.TotalPages = Math.Ceiling((double)blog.Posts.Count() / pageSize);
-
+            ViewBag.PageSize = pageSize;
             ViewBag.Page = page;
             ViewBag.MaxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+            ViewBag.Search = search;
 
             return View(list);
         }
