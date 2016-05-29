@@ -1,4 +1,4 @@
-﻿@model Blog.Models.Post
+﻿@model Blog.Models.PostInsertModel
 
 @{
     ViewBag.Title = "Create";
@@ -32,19 +32,26 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate)
-                @Html.ValidationMessageFor(model => model.CreatedDate)
-            </div>
-        </div>
-
-        <div class="form-group">
             @Html.LabelFor(model => model.CreatorId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CreatorId)
                 @Html.ValidationMessageFor(model => model.CreatorId)
             </div>
+        </div>
+
+        <div class="form-group">
+
+           
+            @Html.LabelFor(model => model.SelectedCat, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SelectedCat,Model.CategoryItems)
+                @Html.ValidationMessageFor(model => model.SelectedCat)
+            </div>
+
+            @*@Html.LabelFor(m => m.SelectedCat)
+            @Html.DropDownListFor(m => m.SelectedCat, Model.CategoryItems)
+            @Html.ValidationMessageFor(m => m.SelectedCat)*@
+
         </div>
 
         <div class="form-group">

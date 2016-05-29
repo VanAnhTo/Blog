@@ -11,7 +11,8 @@ namespace Blog
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Post
     {
         public Post()
@@ -19,19 +20,29 @@ namespace Blog
             this.Attachments = new HashSet<Attachment>();
             this.Comments = new HashSet<Comment>();
         }
-    
+
+        [DisplayName("Ma")]
         public int PostId { get; set; }
+
+        [DisplayName("Tieu de")]
         public string Tittle { get; set; }
+
+        [DisplayName("Noi dung")]
         public string Content { get; set; }
+
+        //public int SelectedCat { get; set; }
+
         public int CategoryId { get; set; }
         public int CreatorId { get; set; }
         public System.DateTime CreatedDate { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public Nullable<int> StatusId { get; set; }
-    
+
         public virtual ICollection<Attachment> Attachments { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual User User { get; set; }
+
+        
     }
 }

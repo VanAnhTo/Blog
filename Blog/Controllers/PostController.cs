@@ -17,7 +17,6 @@ namespace Blog.Controllers
 {
     public class PostController : Controller
     {
-        private PostContext db = new PostContext();
 
         private BlogEntities blog = new BlogEntities();
 
@@ -26,8 +25,11 @@ namespace Blog.Controllers
         // GET: /Post/
         public ActionResult Index(int page = 0, string search = null)
         {
+
             const int pageSize = 3; // you can always do something more elegant to set this
             var count = blog.Posts.Count();
+
+
 
             var list = (from d in blog.Posts
                         join b in blog.Users on d.CreatorId equals b.UserId
@@ -45,7 +47,7 @@ namespace Blog.Controllers
                 p => search == null
                 || p.Content.Contains(search)
                 || p.Tittle.Contains(search));
-            
+
             //ViewBag.CurrentPage = page;           
             //ViewBag.TotalPages = Math.Ceiling((double)blog.Posts.Count() / pageSize);
             ViewBag.PageSize = pageSize;
@@ -55,6 +57,65 @@ namespace Blog.Controllers
 
             return View(list);
         }
+
+        [HttpPost]
+        public ActionResult Search(string search = null)
+        {
+            const int page = 0;
+            const int pageSize = 3; // you can always do something more elegant to set this
+            //var count = blog.Posts.Count();
+
+
+
+            //var list = (from d in blog.Posts
+            //            join b in blog.Users on d.CreatorId equals b.UserId
+            //            select new UserCreatedPost()
+            //            {
+            //                Tittle = d.Tittle,
+            //                CreatedDate = d.CreatedDate,
+            //                PostId = d.PostId,
+            //                CategoryId = d.CategoryId,
+            //                UserName = b.UserName,
+            //                Content = d.Content
+            //            }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
+
+            var count = blog.Posts.Where(
+                p => search == null
+                || p.Content.Contains(search)
+                || p.Tittle.Contains(search)).Count();
+
+            var list = (from d in blog.Posts
+                        join b in blog.Users on d.CreatorId equals b.UserId
+                        where d.Tittle.Contains(search) || d.Content.Contains(search)
+                        select new UserCreatedPost()
+                        {
+                            Tittle = d.Tittle,
+                            CreatedDate = d.CreatedDate,
+                            PostId = d.PostId,
+                            CategoryId = d.CategoryId,
+                            UserName = b.UserName,
+                            Content = d.Content
+                        }).OrderByDescending(e => e.CreatedDate).Skip(page * pageSize).Take(pageSize).ToList();
+
+            //ViewBag.CurrentPage = page;           
+            //ViewBag.TotalPages = Math.Ceiling((double)blog.Posts.Count() / pageSize);
+            ViewBag.PageSize = pageSize;
+            ViewBag.Page = page;
+            ViewBag.MaxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+            ViewBag.Search = search;
+
+            return View("Index", list);
+        }
+
+        //public ActionResult Search(string search = null)
+        //{
+        //    IEnumerable<Post> post = blog.Posts.Where(
+        //       p => search == null
+        //       || p.Content.Contains(search)
+        //       || p.Tittle.Contains(search));
+
+        //    return (ViewBag.Search = search);
+        //}
 
         public ActionResult PostsByCategory(int categoryId, int take)
         {
@@ -166,11 +227,16 @@ namespace Blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PostId,Title,Content,CreatedDate,CreatorId")] Post post)
+        public ActionResult Create(PostInsertModel post)
         {
             if (ModelState.IsValid)
             {
-                blog.Posts.Add(post);
+                var postanc = new Post();
+                postanc.Tittle = post.Tittle;
+                postanc.Content = post.Content;
+                postanc.CategoryId = post.SelectedCat;
+                postanc.CreatorId = post.CreatorId;
+                blog.Posts.Add(postanc);
                 blog.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -178,70 +244,70 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        // GET: /Post/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Post post = blog.Posts.Find(id);
-            if (post == null)
-            {
-                return HttpNotFound();
-            }
-            return View(post);
-        }
+        //// GET: /Post/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Post post = blog.Posts.Find(id);
+        //    if (post == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(post);
+        //}
 
-        // POST: /Post/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PostId,Title,Content,CreatedDate,UserId")] Post post)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(post).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(post);
-        }
+        //// POST: /Post/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "PostId,Title,Content,CreatedDate,UserId")] Post post)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(post).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(post);
+        //}
 
-        // GET: /Post/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Post post = blog.Posts.Find(id);
-            if (post == null)
-            {
-                return HttpNotFound();
-            }
-            return View(post);
-        }
+        //// GET: /Post/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Post post = blog.Posts.Find(id);
+        //    if (post == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(post);
+        //}
 
-        // POST: /Post/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Post post = blog.Posts.Find(id);
-            blog.Posts.Remove(post);
-            blog.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //// POST: /Post/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Post post = blog.Posts.Find(id);
+        //    blog.Posts.Remove(post);
+        //    blog.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        db.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 }

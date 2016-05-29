@@ -22,9 +22,9 @@
             </div>
 
             <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
-                <form class="navbar-form navbar-right" role="search" action="@Url.Action("Index")" method="get">
+                <form class="navbar-form navbar-right" role="search" action="@Url.Action("Search", "Post")" method="post">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search" value="@ViewBag.Search">
+                        <input type="text" class="form-control" placeholder="Search" value="@ViewBag.Search" name="search"/>
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>

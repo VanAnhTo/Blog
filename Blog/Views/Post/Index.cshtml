@@ -9,10 +9,10 @@
         <div class="col-md-12">
 
             <h1>Latest post</h1>
-            @*<p>The .table-striped class adds zebra-stripes to a table:</p>
-                <p>
-                    @Html.ActionLink("Create New", "Create")
-                </p>*@
+            <p>The .table-striped class adds zebra-stripes to a table:</p>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
 
             @foreach (var item in Model)
             {
@@ -22,18 +22,27 @@
                     <div class="row">
                         <div class="group1 col-md-6">
                             <span class="glyphicon glyphicon-user"></span> @item.UserName  &emsp;
-                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate.ToString("dd/MM/yyyy")
+                            <span class="glyphicon glyphicon-time"></span> @item.CreatedDate.ToString("HH:mm:ss dd/MM/yyyy")
                         </div>
                     </div>
                     <br />
-                    <p class="test">@item.Content.Substring(0, 100)</p>
+                    <p class="test">
+                        @if (item.Content.Length > 100)
+                        {
+                            @item.Content.Substring(0, 100)
+                        }
+                        else
+                        {
+                            @item.Content
+                        }
+                </p>
 
-                    <br />
-                    <p class="text-right">
-                        <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
-                    </p>
-                    <hr>
-                </article>
+                <br />
+                <p class="text-right">
+                    <a class="text-right">@Html.ActionLink("Continue reading...", "Details", new { id = item.PostId })</a>
+                </p>
+                <hr>
+            </article>
 
             }
 
@@ -43,7 +52,7 @@
             @pageLinks()
         </div>
 
-@helper buildLinks(int start, int end, string innerContent)
+        @helper buildLinks(int start, int end, string innerContent)
 {
     for (int i = start; i <= end; i++)
     {
@@ -52,7 +61,7 @@
 }
 
 
-@helper pageLinks()
+        @helper pageLinks()
 {
     const int maxPages = 11;
 
@@ -71,7 +80,7 @@
 
         int pageSubset = ViewBag.MaxPage - maxPages - 1 > 1 ? ViewBag.Maxpage - maxPages - 1 : 2;
         @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
-        @buildLinks(ViewBag.MaxPage - maxPages + 3, ViewBag.MaxPage, null) // Show last pages
+                                                @buildLinks(ViewBag.MaxPage - maxPages + 3, ViewBag.MaxPage, null) // Show last pages
 
         return; // Exit
     }
@@ -83,7 +92,7 @@
 
         int pageSubset = maxPages + 2 < ViewBag.MaxPage ? maxPages + 2 : ViewBag.MaxPage - 1;
         @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
-        @buildLinks(ViewBag.MaxPage, ViewBag.MaxPage, null) // Show last page
+                                                @buildLinks(ViewBag.MaxPage, ViewBag.MaxPage, null) // Show last page
         return; // Exit
     }
 
@@ -96,7 +105,7 @@
 
         @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.Page - 4 ? null : "...") // Show 1st page subset (...)
 
-        @buildLinks(ViewBag.Page - 3, ViewBag.Page + 3, null) // Show middle pages
+                                                                                            @buildLinks(ViewBag.Page - 3, ViewBag.Page + 3, null) // Show middle pages
 
         // Show 2nd page subset (...)
         // only show ... if page is contigous to the previous one.
