@@ -219,7 +219,25 @@ namespace Blog.Controllers
         // GET: /Post/Create
         public ActionResult Create()
         {
-            return View();
+            var post = (from d in blog.Posts
+                        join b in blog.Categories on d.CategoryId equals b.CategoryId
+                        select new PostInsertModel()
+                        {
+                            PostId = d.PostId,
+                            Tittle = d.Tittle,
+                            Content = d.Content,
+                            CreatorId = d.CategoryId,
+                            SelectedCat = d.CategoryId
+                        });
+
+            //var cat = (from c in blog.Categories
+            //           select new ListCategory()
+            //               {
+            //               CategoryId =c.CategoryId,
+            //               CategoryName = c.Name
+            //               });
+                       
+            return View(post);
         }
 
         // POST: /Post/Create
