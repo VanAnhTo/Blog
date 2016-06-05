@@ -219,25 +219,20 @@ namespace Blog.Controllers
         // GET: /Post/Create
         public ActionResult Create()
         {
-            var post = (from d in blog.Posts
-                        join b in blog.Categories on d.CategoryId equals b.CategoryId
-                        select new PostInsertModel()
-                        {
-                            PostId = d.PostId,
-                            Tittle = d.Tittle,
-                            Content = d.Content,
-                            CreatorId = d.CategoryId,
-                            SelectedCat = d.CategoryId
-                        });
 
-            //var cat = (from c in blog.Categories
-            //           select new ListCategory()
-            //               {
-            //               CategoryId =c.CategoryId,
-            //               CategoryName = c.Name
-            //               });
-                       
-            return View(post);
+            //PostInsertModel obj = new PostInsertModel();
+            //obj.cate = (from d in blog.Categories
+            //                     select d).ToList() ;
+
+            IEnumerable<SelectListItem> items = blog.Categories.Select(c => new SelectListItem
+            {
+                Value = c.Name,
+                Text = c.Name
+            });
+            ViewBag.Name = items;
+            
+            return View();
+            
         }
 
         // POST: /Post/Create

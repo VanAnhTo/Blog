@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace Blog.Models
 {
@@ -20,24 +21,23 @@ namespace Blog.Models
 
         public int CreatorId { get; set; }
 
-        //public int CategoryId { get; set; }
+        public int CategoryId { get; set; }
+        //public string CategoryName { get; set; }
 
-        private readonly List<ListCategory> _flavors;
+        // public List<Category> categoryList;
+
+       // public List<Category> cate;
+
         [DisplayName("Nhom bai")]
-        public int SelectedCat { get; set; }        
-        public IEnumerable<SelectListItem> CategoryItems
-        {
-            get {
-                var allCates = _flavors.Select(f => new SelectListItem
-                {
-                    Value = f.CategoryId.ToString(),
-                    Text = f.CategoryName
-                });
-                return allCates;
-         
-            }
-        }
+        public int SelectedCat { get; set; }
+        //public List<Category> cate;
+        //public SelectList CategoryList { get; set; }  
+        //public IEnumerable<SelectListItem> CategoryItems
+        //{
+        //    get { return new SelectList(cate, "CategoryId", "CategoryName"); }
+        //    set {  }
+        //}
+       
     }
-
 
 }
