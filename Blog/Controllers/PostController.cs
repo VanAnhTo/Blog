@@ -220,19 +220,12 @@ namespace Blog.Controllers
         public ActionResult Create()
         {
 
-            //PostInsertModel obj = new PostInsertModel();
-            //obj.cate = (from d in blog.Categories
-            //                     select d).ToList() ;
+            PostInsertModel obj = new PostInsertModel();
 
-            IEnumerable<SelectListItem> items = blog.Categories.Select(c => new SelectListItem
-            {
-                Value = c.Name,
-                Text = c.Name
-            });
-            ViewBag.Name = items;
-            
-            return View();
-            
+            obj.CategoryItems = new SelectList(blog.Categories, "CategoryId", "Name", 1);
+
+            return View(obj);
+
         }
 
         // POST: /Post/Create
@@ -257,26 +250,36 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        //// GET: /Post/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Post post = blog.Posts.Find(id);
-        //    if (post == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(post);
-        //}
+        // GET: /Post/Edit/5
+        public ActionResult EditPost(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            //Post post = blog.Posts.Find(id);
+            var post = (from d in blog.Posts
+                        where d.PostId == id
+                        select new PostInsertModel()
+                        {
+                            Tittle = d.Tittle,
+                            CategoryId = d.CategoryId,
+                            Content = d.Content,
+                            SelectedCat = d.CategoryId,
+                            CreatorId = d.CreatorId 
+                        }).FirstOrDefault();
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
 
-        //// POST: /Post/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
+        // POST: /Post/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "PostId,Title,Content,CreatedDate,UserId")] Post post)
         //{
         //    if (ModelState.IsValid)
@@ -288,7 +291,7 @@ namespace Blog.Controllers
         //    return View(post);
         //}
 
-        //// GET: /Post/Delete/5
+        // GET: /Post/Delete/5
         //public ActionResult Delete(int? id)
         //{
         //    if (id == null)
@@ -303,16 +306,16 @@ namespace Blog.Controllers
         //    return View(post);
         //}
 
-        //// POST: /Post/Delete/5
+        // POST: /Post/Delete/5
         //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Post post = blog.Posts.Find(id);
-        //    blog.Posts.Remove(post);
-        //    blog.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Post post = blog.Posts.Find(id);
+            blog.Posts.Remove(post);
+            blog.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         //protected override void Dispose(bool disposing)
         //{
@@ -323,4 +326,5 @@ namespace Blog.Controllers
         //    base.Dispose(disposing);
         //}
     }
+
 }

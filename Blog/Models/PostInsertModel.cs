@@ -22,22 +22,12 @@ namespace Blog.Models
         public int CreatorId { get; set; }
 
         public int CategoryId { get; set; }
-        //public string CategoryName { get; set; }
-
-        // public List<Category> categoryList;
-
-       // public List<Category> cate;
 
         [DisplayName("Nhom bai")]
         public int SelectedCat { get; set; }
-        //public List<Category> cate;
-        //public SelectList CategoryList { get; set; }  
-        //public IEnumerable<SelectListItem> CategoryItems
-        //{
-        //    get { return new SelectList(cate, "CategoryId", "CategoryName"); }
-        //    set {  }
-        //}
-       
+
+        public SelectList CategoryItems { get; set; }
+
     }
 
 }

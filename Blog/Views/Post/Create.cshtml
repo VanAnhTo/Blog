@@ -40,19 +40,11 @@
         </div>
 
         <div class="form-group">
-
-
             @Html.LabelFor(model => model.SelectedCat, new { @class = "control-label col-md-2" })
             <div class="col-md-10">              
-                @Html.DropDownList("Name")
-                @Html.ValidationMessageFor(model => model.SelectedCat)
-          
-             </div>
-         
-
-        @*@Html.LabelFor(m => m.SelectedCat)
-            @Html.DropDownListFor(m => m.SelectedCat, Model.CategoryItems)
-            @Html.ValidationMessageFor(m => m.SelectedCat)*@
+                 @Html.DropDownListFor(n => n.SelectedCat, Model.CategoryItems, "Please select an order template")
+                @Html.ValidationMessageFor(model => model.SelectedCat)          
+            </div>
 
     </div>
 
