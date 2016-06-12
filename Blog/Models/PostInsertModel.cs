@@ -13,17 +13,17 @@ namespace Blog.Models
 
         public int PostId { get; set; }
 
-        [DisplayName("Tieu de 1111")]
+        [DisplayName("Ten bai viet ")]
         public string Tittle { get; set; }
 
-        [DisplayName("Noi dung 1111")]
+        [DisplayName("Noi dung bai viet")]
         public string Content { get; set; }
 
         public int CreatorId { get; set; }
 
         public int CategoryId { get; set; }
 
-        [DisplayName("Nhom bai")]
+        [DisplayName("The loai bai viet")]
         public int SelectedCat { get; set; }
 
         public SelectList CategoryItems { get; set; }

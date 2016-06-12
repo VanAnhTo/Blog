@@ -10,6 +10,8 @@ using Blog.Models;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using PagedList;
+using Microsoft.AspNet.Identity;
+using System.Web.Security;
 
 
 
@@ -230,19 +232,24 @@ namespace Blog.Controllers
 
         // POST: /Post/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.       
+        [HttpPost]     
         [ValidateAntiForgeryToken]
+        
         public ActionResult Create(PostInsertModel post)
         {
+            
             if (ModelState.IsValid)
             {
                 var postanc = new Post();
                 postanc.Tittle = post.Tittle;
                 postanc.Content = post.Content;
                 postanc.CategoryId = post.SelectedCat;
+                //postanc.CreatorId = ;
                 postanc.CreatorId = post.CreatorId;
+                postanc.CreatedDate = System.DateTime.Now;
                 blog.Posts.Add(postanc);
+                
                 blog.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -251,12 +258,14 @@ namespace Blog.Controllers
         }
 
         // GET: /Post/Edit/5
-        public ActionResult EditPost(int? id)
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            PostInsertModel obj = new PostInsertModel();
+            obj.CategoryItems = new SelectList(blog.Categories, "CategoryId", "Name", 1);
             //Post post = blog.Posts.Find(id);
             var post = (from d in blog.Posts
                         where d.PostId == id
@@ -266,12 +275,15 @@ namespace Blog.Controllers
                             CategoryId = d.CategoryId,
                             Content = d.Content,
                             SelectedCat = d.CategoryId,
-                            CreatorId = d.CreatorId 
+                            //CreatorId = d.CreatorId   
                         }).FirstOrDefault();
             if (post == null)
             {
                 return HttpNotFound();
             }
+            //PostInsertModel obj = new PostInsertModel();
+
+            // obj.CategoryItems = new SelectList(blog.Categories, "CategoryId", "Name", 1);
             return View(post);
         }
 
