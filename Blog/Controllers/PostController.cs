@@ -233,12 +233,12 @@ namespace Blog.Controllers
         // POST: /Post/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.       
-        [HttpPost]     
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        
+
         public ActionResult Create(PostInsertModel post)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var postanc = new Post();
@@ -249,7 +249,6 @@ namespace Blog.Controllers
                 postanc.CreatorId = post.CreatorId;
                 postanc.CreatedDate = System.DateTime.Now;
                 blog.Posts.Add(postanc);
-                
                 blog.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -264,8 +263,7 @@ namespace Blog.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PostInsertModel obj = new PostInsertModel();
-            obj.CategoryItems = new SelectList(blog.Categories, "CategoryId", "Name", 1);
+
             //Post post = blog.Posts.Find(id);
             var post = (from d in blog.Posts
                         where d.PostId == id
@@ -277,13 +275,11 @@ namespace Blog.Controllers
                             SelectedCat = d.CategoryId,
                             //CreatorId = d.CreatorId   
                         }).FirstOrDefault();
+            post.CategoryItems = new SelectList(blog.Categories, "CategoryId", "Name", 1);
             if (post == null)
             {
                 return HttpNotFound();
             }
-            //PostInsertModel obj = new PostInsertModel();
-
-            // obj.CategoryItems = new SelectList(blog.Categories, "CategoryId", "Name", 1);
             return View(post);
         }
 
@@ -292,16 +288,25 @@ namespace Blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "PostId,Title,Content,CreatedDate,UserId")] Post post)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(post).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(post);
-        //}
+        public ActionResult Edit(PostInsertModel post, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Entry(post).State = EntityState.Modified;
+                var postanc = blog.Posts.Where(d => d.PostId == id).FirstOrDefault();
+                postanc.PostId = id;
+                postanc.Tittle = post.Tittle;
+                postanc.Content = post.Content;
+                postanc.CategoryId = post.SelectedCat;
+                postanc.ModifiedDate = System.DateTime.Now;
+                postanc.CreatorId = post.CreatorId;
+                blog.Entry(postanc).State = EntityState.Modified;
+                blog.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View(post);
+        }
 
         // GET: /Post/Delete/5
         //public ActionResult Delete(int? id)

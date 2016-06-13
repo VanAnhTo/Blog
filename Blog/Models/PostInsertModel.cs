@@ -5,12 +5,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
 
 namespace Blog.Models
 {
     public class PostInsertModel
     {
-
+        
         public int PostId { get; set; }
 
         [DisplayName("Ten bai viet ")]
@@ -22,6 +23,8 @@ namespace Blog.Models
         public int CreatorId { get; set; }
 
         public int CategoryId { get; set; }
+
+        public DateTime ModifiedDate { get; set; }
 
         [DisplayName("The loai bai viet")]
         public int SelectedCat { get; set; }
