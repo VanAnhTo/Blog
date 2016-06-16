@@ -1,5 +1,8 @@
 ﻿@model IEnumerable<Blog.Models.Comments>
 
+
+
+
 @foreach (var item in Model)
 {
     <ul id="comments" class="list-group comments">
@@ -9,12 +12,53 @@
                 <p class="pull-right">@item.CreatedDate.ToString("dd/MM/yyyy")</p>
             </div>
             <p>
-             <em>@item.content</em>
+                <em>@item.content</em>
             </p>
         </li>
     </ul>
 
 }
+<div class="well">
+    <form role="form" class="clearfix">
+        <div class="col-md-6 form-group">
+            <label class="sr-only" for="name">Name 11111</label>
+            <input type="text" class="form-control" id="name" placeholder="Name">
+        </div>
+
+        <div class="col-md-6 form-group">
+            <label class="sr-only" for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Email">
+        </div>
+
+        <div class="col-md-12 form-group">
+            <label class="sr-only" for="email">Comment</label>
+            <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
+        </div>
+
+        <div class="col-md-12 form-group text-right">
+            <button type="submit" class="btn btn-primary" id="btnsubmit">Submit</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+
+    $('#btnsubmit').click(function () {
+
+        var a = $('ul#comments').append('<div class ="clearfix"><h4>' + $('input#name').val() + '</h4></div>');
+
+        var dt = new Date();
+        var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
+
+        var datetime = $(a).append('<p class ="pull-right">' + time + '</p>');
+
+        var contentofcomment = $(a).append('<p><em>' + $('textarea#comment').val() + '</em></p>');
+
+    });
+</script>
+
+
+
+
 
 
 
