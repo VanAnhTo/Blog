@@ -36,30 +36,16 @@
                 <em>@item.content</em>
             </p>
         </li>
-
     }
 </ul>
-    
 
 <script type="text/javascript">
 
     $('#btnsubmit').click(function () {
-
         var dt = new Date();
         var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
-
-        var a = $('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
-        $('li#comment').append(a);
-
-        //var c = $("li#comment").append('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
-
-
-        //var a = $('li#comment').append('<div class="clearfix"> <h4>' + $('input#name').val() + '</h4></div>');
-
-        //var datetime = $(a).append('<p class ="pull-right">' + time + '</p>');
-
-        //var contentofcomment = $(a).append('<p><em>' + $('textarea#comment').val() + '</em></p>');
-
+        var a = $('<li><div class = "clearfix"><h4>' + $('input#name').val() + '</h4></div> \ <p><em>' + $('textarea#comment').val() + '</em> \ <p class ="pull-right">' + time + '</p> </li>');
+         $('ul#comments').append(a);
     });
 </script>
 
