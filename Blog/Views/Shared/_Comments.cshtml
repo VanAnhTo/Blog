@@ -1,67 +1,94 @@
-﻿@model IEnumerable<Blog.Models.Comments>
+﻿@*@model IEnumerable<Blog.Models.Comments>*@
+@model Blog.Models.UserCreatedPost
 
-<div class="well">
-    <form role="form" class="clearfix">
-        <div class="col-md-6 form-group">
-            <label class="sr-only" for="name">Name 11111</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
-        </div>
-
-        <div class="col-md-6 form-group">
-            <label class="sr-only" for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
-        </div>
-
-        <div class="col-md-12 form-group">
-            <label class="sr-only" for="email">Comment</label>
-            <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
-        </div>
-
-        <div class="col-md-12 form-group text-right">
-            <button type="submit" class="btn btn-primary" id="btnsubmit">Submit</button>
-        </div>
-    </form>
-</div>
-<ul id="comments" class="list-group comments">
-
-    @foreach (var item in Model)
-    {
-
-        <li class="comment">
-            <div class="clearfix">
-                <h4 class="pull-left">@item.userId</h4>
-                <p class="pull-right">@item.CreatedDate.ToString("dd/MM/yyyy")</p>
+<div class="form-horizontal">
+    <div class="well">
+        <form role="form" class="clearfix" action="Comment" method="post">
+            @Html.HiddenFor(model => model.CommentId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserId, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserId)
+                    @Html.ValidationMessageFor(model => model.UserId)
+                </div>
             </div>
-            <p>
-                <em>@item.content</em>
-            </p>
-        </li>
 
-    }
-</ul>
-    
+            <div class="form-group">
+                @Html.LabelFor(model => model.contentcomment, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.contentcomment)
+                    @Html.ValidationMessageFor(model => model.contentcomment)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
 
-<script type="text/javascript">
+            @*<div class="col-md-12 form-group text-right">
+                <button type="submit" class="btn btn-primary" id="btnsubmit">Submit</button>
+            </div>*@
+        </form>
+    </div>
+</div>
 
-    $('#btnsubmit').click(function () {
+@*<div class="well">
+    @Html.HiddenFor(model => model.PostId)
+    @Html.HiddenFor(model => model.CommentId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.userId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.userId)
+            @Html.ValidationMessageFor(model => model.userId)
+        </div>
+    </div>
 
-        var dt = new Date();
-        var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
+    <div class="form-group">
+        @Html.LabelFor(model => model.content, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.content)
+            @Html.ValidationMessageFor(model => model.content)
+        </div>
+    </div>
 
-        var a = $('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
-        $('li#comment').append(a);
+<div class="form-group">
+        @Html.LabelFor(model => model.CreatedDate, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.CreatedDate)
+            @Html.ValidationMessageFor(model => model.CreatedDate)
+        </div>
+    </div>*@
 
-        //var c = $("li#comment").append('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
 
 
-        //var a = $('li#comment').append('<div class="clearfix"> <h4>' + $('input#name').val() + '</h4></div>');
+@*<div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
 
-        //var datetime = $(a).append('<p class ="pull-right">' + time + '</p>');
 
-        //var contentofcomment = $(a).append('<p><em>' + $('textarea#comment').val() + '</em></p>');
+@*<ul id="comments" class="list-group comments">
 
-    });
-</script>
+        @foreach (var item in Model)
+        {
+            <li class="comment">
+                <div class="clearfix">
+                    <h4 class="pull-left">@item.userId</h4>
+                    <p class="pull-right">@item.CreatedDate.ToString("dd/MM/yyyy")</p>
+                </div>
+                <p>
+                    <em>@item.content</em>
+                </p>
+            </li>
+        }
+
+   </ul>*@
+
+
+
 
 
 

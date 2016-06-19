@@ -23,7 +23,7 @@
             <br />
             <p class="test">@Model.Content</p>
 
-            <hr> 
+            <hr>
 
         </div>
     </div>
@@ -32,47 +32,53 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 
-
 <h4>Leave a comment </h4>
-<ul>@Html.Action("ViewComment")</ul>
-@*<div class="well">
-    <form role="form" class="clearfix">
-        <div class="col-md-6 form-group">
-            <label class="sr-only" for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
+@Html.Action("Comment")
+
+
+
+
+    @*@Html.HiddenFor(model => model.PostId)
+    @Html.HiddenFor(model => model.CommentId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UserId)
+            @Html.ValidationMessageFor(model => model.UserId)
         </div>
+    </div>
 
-        <div class="col-md-6 form-group">
-            <label class="sr-only" for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
+    <div class="form-group">
+        @Html.LabelFor(model => model.contentcomment, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.contentcomment)
+            @Html.ValidationMessageFor(model => model.contentcomment)
         </div>
-
-        <div class="col-md-12 form-group">
-            <label class="sr-only" for="email">Comment</label>
-            <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
         </div>
+    </div>*@
 
-        <div class="col-md-12 form-group text-right">
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </div>
-    </form>
-</div>
 
-<script type="text/javascript">
+@section scripts {
+    @*<script type="text/javascript">
+            $('#comment').keypress(function (e) {
 
-    $('.btn.btn-primary').click(function () {
+                if (e.which == 13) {
+                    var dt = new Date();
+                    var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
 
-        var a = $('ul#comments').append('<li class ="comment clearfix" id="li1"> <div class ="clearfix"><h4>' + $('input#name').val() + '</h4></div></li>');
+                    var a = $('<li><div class="clearfix"><h4>' + $('input#name').val() + '</h4></div> \ <p><em>' + $('textarea#comment').val() + '</em> \ <p class="pull-right">' + time + '</p> </li>');
+                    console.log(a);
+                    $('ul#comments').append(a);
+                    e.preventDefault();
+                }
+            });
+        </script>*@
+}
 
-        var dt = new Date();
-        var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
-
-        var datetime = $(a).append('<p class ="pull-right">' + time + '</p>');
-
-        var contentofcomment = $(a).append('<p><em>' + $('textarea#comment').val() + '</em></p>');
-
-    });
-</script>*@
 
 
 
