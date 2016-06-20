@@ -15,10 +15,6 @@ namespace Blog.Models
         public int CategoryId { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public int CommentId { get; set; }
-        //public int userId { get; set; }
-        //public int PostId { get; set; }
-        public string contentcomment { get; set; }
-        public System.DateTime CreatedDateComment { get; set; }
+        
     }
 }

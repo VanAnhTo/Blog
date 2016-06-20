@@ -308,24 +308,6 @@ namespace Blog.Controllers
             return View(post);
         }
 
-        [HttpPost]
-        public ActionResult Comment(UserCreatedPost comment)
-        {
-
-            var postanc = new Comment();
-            
-            postanc.CommentId = comment.CommentId;
-            postanc.PostId = comment.PostId;
-            postanc.Content = comment.contentcomment;
-            postanc.UserId = comment.UserId;
-            postanc.CreatedDate = System.DateTime.Now;
-            blog.Comments.Add(postanc);
-            blog.SaveChanges();
-
-            //var comment = blog.Comments(postId, content);
-            return RedirectToAction("Details");
-        }
-
         // GET: /Post/Delete/5
         //public ActionResult Delete(int? id)
         //{

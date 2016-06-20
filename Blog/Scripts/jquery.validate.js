@@ -67,48 +67,48 @@ $.extend($.fn, {
 			});
 
 			// validate the form on submit
-	//		this.submit( function( event ) {
-	//			if ( validator.settings.debug ) {
-	//				// prevent form submit to be able to see console output
-	//				event.preventDefault();
-	//			}
-	//			function handle() {
-	//				var hidden;
-	//				if ( validator.settings.submitHandler ) {
-	//					if ( validator.submitButton ) {
-	//						// insert a hidden input as a replacement for the missing submit button
-	//						hidden = $("<input type='hidden'/>").attr("name", validator.submitButton.name).val( $(validator.submitButton).val() ).appendTo(validator.currentForm);
-	//					}
-	//					validator.settings.submitHandler.call( validator, validator.currentForm, event );
-	//					if ( validator.submitButton ) {
-	//						// and clean up afterwards; thanks to no-block-scope, hidden can be referenced
-	//						hidden.remove();
-	//					}
-	//					return false;
-	//				}
-	//				return true;
-	//			}
+			this.submit( function( event ) {
+				if ( validator.settings.debug ) {
+					// prevent form submit to be able to see console output
+					event.preventDefault();
+				}
+				function handle() {
+					var hidden;
+					if ( validator.settings.submitHandler ) {
+						if ( validator.submitButton ) {
+							// insert a hidden input as a replacement for the missing submit button
+							hidden = $("<input type='hidden'/>").attr("name", validator.submitButton.name).val( $(validator.submitButton).val() ).appendTo(validator.currentForm);
+						}
+						validator.settings.submitHandler.call( validator, validator.currentForm, event );
+						if ( validator.submitButton ) {
+							// and clean up afterwards; thanks to no-block-scope, hidden can be referenced
+							hidden.remove();
+						}
+						return false;
+					}
+					return true;
+				}
 
-	//			// prevent submit for invalid forms or custom submit handlers
-	//			if ( validator.cancelSubmit ) {
-	//				validator.cancelSubmit = false;
-	//				return handle();
-	//			}
-	//			if ( validator.form() ) {
-	//				if ( validator.pendingRequest ) {
-	//					validator.formSubmitted = true;
-	//					return false;
-	//				}
-	//				return handle();
-	//			} else {
-	//				validator.focusInvalid();
-	//				return false;
-	//			}
-	//		});
-	//	}
+				// prevent submit for invalid forms or custom submit handlers
+				if ( validator.cancelSubmit ) {
+					validator.cancelSubmit = false;
+					return handle();
+				}
+				if ( validator.form() ) {
+					if ( validator.pendingRequest ) {
+						validator.formSubmitted = true;
+						return false;
+					}
+					return handle();
+				} else {
+					validator.focusInvalid();
+					return false;
+				}
+			});
+		}
 
-	//	return validator;
-	//},
+		return validator;
+	},
 	// http://docs.jquery.com/Plugins/Validation/valid
 	valid: function() {
 		if ( $(this[0]).is("form")) {
