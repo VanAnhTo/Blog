@@ -19,6 +19,8 @@ F:\lol\CSharp\Blog\Blog\bin\Microsoft.Owin.Security.Twitter.dll
 F:\lol\CSharp\Blog\Blog\bin\Microsoft.Web.Infrastructure.dll
 F:\lol\CSharp\Blog\Blog\bin\Newtonsoft.Json.dll
 F:\lol\CSharp\Blog\Blog\bin\Owin.dll
+F:\lol\CSharp\Blog\Blog\bin\PagedList.dll
+F:\lol\CSharp\Blog\Blog\bin\PagedList.Mvc.dll
 F:\lol\CSharp\Blog\Blog\bin\System.Web.Helpers.dll
 F:\lol\CSharp\Blog\Blog\bin\System.Web.Mvc.dll
 F:\lol\CSharp\Blog\Blog\bin\System.Web.Optimization.dll
@@ -27,6 +29,8 @@ F:\lol\CSharp\Blog\Blog\bin\System.Web.WebPages.Deployment.dll
 F:\lol\CSharp\Blog\Blog\bin\System.Web.WebPages.dll
 F:\lol\CSharp\Blog\Blog\bin\System.Web.WebPages.Razor.dll
 F:\lol\CSharp\Blog\Blog\bin\WebGrease.dll
+F:\lol\CSharp\Blog\Blog\bin\PagedList.xml
+F:\lol\CSharp\Blog\Blog\bin\PagedList.Mvc.xml
 F:\lol\CSharp\Blog\Blog\bin\System.Web.Helpers.xml
 F:\lol\CSharp\Blog\Blog\bin\System.Web.Mvc.xml
 F:\lol\CSharp\Blog\Blog\bin\System.Web.Optimization.xml
@@ -53,8 +57,3 @@ F:\lol\CSharp\Blog\Blog\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 F:\lol\CSharp\Blog\Blog\obj\Debug\Blog.csprojResolveAssemblyReference.cache
 F:\lol\CSharp\Blog\Blog\obj\Debug\Blog.dll
 F:\lol\CSharp\Blog\Blog\obj\Debug\Blog.pdb
-F:\lol\CSharp\Blog\Blog\bin\MvcPaging.dll
-F:\lol\CSharp\Blog\Blog\bin\PagedList.dll
-F:\lol\CSharp\Blog\Blog\bin\PagedList.Mvc.dll
-F:\lol\CSharp\Blog\Blog\bin\PagedList.xml
-F:\lol\CSharp\Blog\Blog\bin\PagedList.Mvc.xml

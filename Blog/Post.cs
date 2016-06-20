@@ -30,8 +30,6 @@ namespace Blog
         [DisplayName("Noi dung")]
         public string Content { get; set; }
 
-        //public int SelectedCat { get; set; }
-
         public int CategoryId { get; set; }
         public int CreatorId { get; set; }
         public System.DateTime CreatedDate { get; set; }

@@ -206,8 +206,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LatestPosts.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Post.cs" />
-    <Compile Include="Models\PostContext.cs" />
+    <Compile Include="Models\PostInsertModel.cs" />
     <Compile Include="Models\UserCreatedPost.cs" />
     <Compile Include="Post.cs">
       <DependentUpon>Blog.tt</DependentUpon>
