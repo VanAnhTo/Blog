@@ -81,7 +81,7 @@
 
         int pageSubset = ViewBag.MaxPage - maxPages - 1 > 1 ? ViewBag.Maxpage - maxPages - 1 : 2;
         @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
-                                                @buildLinks(ViewBag.MaxPage - maxPages + 3, ViewBag.MaxPage, null) // Show last pages
+        @buildLinks(ViewBag.MaxPage - maxPages + 3, ViewBag.MaxPage, null) // Show last pages
 
         return; // Exit
     }
@@ -93,7 +93,7 @@
 
         int pageSubset = maxPages + 2 < ViewBag.MaxPage ? maxPages + 2 : ViewBag.MaxPage - 1;
         @buildLinks(pageSubset, pageSubset, "...") // Show page subset (...)
-                                                @buildLinks(ViewBag.MaxPage, ViewBag.MaxPage, null) // Show last page
+        @buildLinks(ViewBag.MaxPage, ViewBag.MaxPage, null) // Show last page
         return; // Exit
     }
 
@@ -106,7 +106,7 @@
 
         @buildLinks(pageSubset1, pageSubset1, pageSubset1 == ViewBag.Page - 4 ? null : "...") // Show 1st page subset (...)
 
-                                                                                            @buildLinks(ViewBag.Page - 3, ViewBag.Page + 3, null) // Show middle pages
+        @buildLinks(ViewBag.Page - 3, ViewBag.Page + 3, null) // Show middle pages
 
         // Show 2nd page subset (...)
         // only show ... if page is contigous to the previous one.
@@ -116,13 +116,6 @@
 
     }
 }
-
-
-
-
-
-
-
 
 
         @*@if (ViewBag.Page > 0)

@@ -1,68 +1,107 @@
-﻿@model IEnumerable<Blog.Models.Comments>
+﻿@model IEnumerable<Blog.Models.CommentModels>
 
-<div class="well">
-    <form role="form" class="clearfix">
-        <div class="col-md-6 form-group">
-            <label class="sr-only" for="name">Name 11111</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
-        </div>
+@*@using (Html.BeginForm())
+    {
+        @Html.EditorForModel();
+    }*@
 
-        <div class="col-md-6 form-group">
-            <label class="sr-only" for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email">
-        </div>
-
-        <div class="col-md-12 form-group">
-            <label class="sr-only" for="email">Comment</label>
-            <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
-        </div>
-
-        <div class="col-md-12 form-group text-right">
-            <button type="submit" class="btn btn-primary" id="btnsubmit">Submit</button>
-        </div>
-    </form>
-</div>
 <ul id="comments" class="list-group comments">
-
     @foreach (var item in Model)
     {
-
         <li class="comment">
             <div class="clearfix">
-                <h4 class="pull-left">@item.userId</h4>
-                <p class="pull-right">@item.CreatedDate.ToString("dd/MM/yyyy")</p>
+                <h4 class="pull-left">item.userId</h4>
+                <p class="pull-right">item.CreatedDate.ToString("dd/MM/yyyy")</p>
             </div>
             <p>
-                <em>@item.content</em>
+                <em>item.content</em>
             </p>
         </li>
-
     }
 </ul>
-    
-
-<script type="text/javascript">
-
-    $('#btnsubmit').click(function () {
-
-        var dt = new Date();
-        var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
-
-        var a = $('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
-        $('li#comment').append(a);
-
-        //var c = $("li#comment").append('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
 
 
-        //var a = $('li#comment').append('<div class="clearfix"> <h4>' + $('input#name').val() + '</h4></div>');
+@*<div class="well">
+          <form role="form" class="clearfix">
+              <div class="col-md-12 form-group">
+                  <label class="sr-only" for="usr">Name:</label>
+                  <input type="text" class="form-control" id="usr">
+              </div>
+              <div class="col-md-12 form-group">
+                  <label class="sr-only" for="pwd">Password:</label>
+                  <input type="email" class="form-control" id="pwd">
+              </div>
 
-        //var datetime = $(a).append('<p class ="pull-right">' + time + '</p>');
+              <div class="col-md-12 form-group">
+                  <label class="sr-only" for="email">Comment</label>
+                  <textarea class="form-control" id="comment" placeholder="Comment"></textarea>
+              </div>
 
-        //var contentofcomment = $(a).append('<p><em>' + $('textarea#comment').val() + '</em></p>');
+              <div class="col-md-12 form-group text-right">
+                  <button type="button" class="btn btn-primary" id="btnsubmit">Submit</button>
+              </div>
+          </form>
+    </div*@>
+@*<div class="form-horizontal">
 
-    });
-</script>
+        <div class="form-group">
+            @Html.LabelFor(model => model.content, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.content)
+                @Html.ValidationMessageFor(model => model.content)
+            </div>
+        </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.userId, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.userId)
+                @Html.ValidationMessageFor(model => model.userId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+
+
+@*@section scripts {
+        <script type="text/javascript">
+
+            $('#btnsubmit').click(function () {
+
+                var dt = new Date();
+                var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
+
+                var comment = $('<div class = "clearfix" id ="subcomment"><h4>' + $('input#name').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#comment').val() + '</em></p>');
+                $('li#comment').append(comment);
+
+            });
+        </script>
+    }*@
+
+@*@section scripts {
+    <script type="text/javascript">
+        $('#comment').keypress(function (e) {
+            $('.btn.btn-primary').click(function () {
+
+                if (e.which == 13) {
+                    var dt = new Date();
+                    var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
+                    var a = $('ul#comments').append('<li class ="comment clearfix" id="li1"> <div class ="clearfix"><h4>' + $('input#name').val() + '</h4></div></li>');
+
+                    var a = $('<li><div class="clearfix"><h4>' + $('input#name').val() + '</h4></div> \ <p><em>' + $('textarea#comment').val() + '</em> \ <p class="pull-right">' + time + '</p> </li>');
+                    console.log(a);
+                    $('ul#comments').append(a);
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+}*@
 
 
 

@@ -180,7 +180,7 @@ namespace Blog.Controllers
         {
             var list = (from d in blog.Comments
                         where d.PostId == id
-                        select new Comments()
+                        select new CommentModels()
                         {
                             content = d.Content,
                             CreatedDate = d.CreatedDate,
@@ -283,6 +283,9 @@ namespace Blog.Controllers
             return View(post);
         }
 
+
+
+
         // POST: /Post/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -306,6 +309,24 @@ namespace Blog.Controllers
 
             }
             return View(post);
+        }
+
+        [HttpPost]
+        public ActionResult SaveComment(CommentModels comment, int postId)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Entry(post).State = EntityState.Modified;
+                var postanc =  new Comment();
+                postanc.UserId = postId;
+                postanc.Content = comment.content;
+                postanc.CreatedDate = System.DateTime.Now;
+                blog.Comments.Add(postanc);
+                blog.SaveChanges();
+                return RedirectToAction("Details");
+
+            }
+            return View("Details");
         }
 
         // GET: /Post/Delete/5

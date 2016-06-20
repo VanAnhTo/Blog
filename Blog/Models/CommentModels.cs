@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Blog.Models
 {
-    public class Comments
+    public class CommentModels
     {
         public int userId { get; set; }
         public string content { get; set; }

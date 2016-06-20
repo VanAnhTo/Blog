@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Post</h4>
         <hr />
@@ -51,51 +51,12 @@
 
         </div>
 
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.Tittle, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tittle)
-                @Html.ValidationMessageFor(model => model.Tittle)
-            </div>
-        </div>
-
         <div class="form-group">
-            @Html.LabelFor(model => model.Content, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Content)
-                @Html.ValidationMessageFor(model => model.Content)
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
-
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.CreatedDate, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedDate)
-                @Html.ValidationMessageFor(model => model.CreatedDate)
-            </div>
-        </div>*@
-        @*<div class="form-group">
-            @Html.LabelFor(model => model.SelectedCat, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(n => n.SelectedCat, Model.CategoryItems, "Please select an order template")
-                @Html.ValidationMessageFor(model => model.SelectedCat)
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreatorId, new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CreatorId)
-                    @Html.ValidationMessageFor(model => model.CreatorId)
-                </div>
-            </div>*@
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
-                </div>
-            </div>
-        </div>
+    </div>
 }
 
 <div>
