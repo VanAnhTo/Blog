@@ -190,6 +190,11 @@ namespace Blog.Controllers
 
         }
 
+        public PartialViewResult ViewCommentPost()
+        {
+            return PartialView("SaveComment");
+        }
+
         // GET: /Post/Details/5
         public ActionResult Details(int? id)
         {
@@ -323,10 +328,10 @@ namespace Blog.Controllers
                 postanc.CreatedDate = System.DateTime.Now;
                 blog.Comments.Add(postanc);
                 blog.SaveChanges();
-                return RedirectToAction("Details");
+                return RedirectToAction("SaveComment");
 
             }
-            return View("Details");
+            return View();
         }
 
         // GET: /Post/Delete/5
