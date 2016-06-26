@@ -9,6 +9,8 @@ namespace Blog.Models
 {
     public class CommentModels
     {
+        public int postId { get; set; }
+
         [DisplayName("Ten")]
         public int userId { get; set; }
 
