@@ -15,7 +15,7 @@
                     @Html.ActionLink("Sua bai viet", "Edit", @Model.PostId)
                     <br />
                     <br />
-                    <span class="glyphicon glyphicon-user"></span> @Model.UserName &emsp;
+                    <span class="glyphicon glyphicon-user"></span> @Model.PostId + @Model.UserName &emsp;
                     <span class="glyphicon glyphicon-time"></span> @Model.CreatedDate.ToString("dd/MM/yyyy")
 
                 </div>
@@ -35,4 +35,4 @@
 
 <h4>Leave a comment </h4>
 @Html.Action("ViewComment")
-@Html.Action("ViewCommentPost")
+@Html.Action("ViewCommentPost", new { postId = @Model.PostId })

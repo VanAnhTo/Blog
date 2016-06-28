@@ -190,9 +190,11 @@ namespace Blog.Controllers
 
         }
 
-        public PartialViewResult ViewCommentPost()
+        public PartialViewResult ViewCommentPost(int postId)
         {
-            return PartialView("SaveComment");
+            var post = new CommentModels();
+            post.postId = postId;
+            return PartialView("SaveComment",post);
         }
 
         // GET: /Post/Details/5
@@ -208,6 +210,7 @@ namespace Blog.Controllers
                         where d.PostId == id
                         select new UserCreatedPost()
                         {
+                            PostId = d.PostId,
                             Tittle = d.Tittle,
                             CategoryId = d.CategoryId,
                             Content = d.Content,
@@ -323,12 +326,13 @@ namespace Blog.Controllers
             {
                 //db.Entry(post).State = EntityState.Modified;
                 var postanc =  new Comment();
-                postanc.UserId = postId;
+                postanc.PostId = comment.postId;
+                postanc.UserId = comment.userId;
                 postanc.Content = comment.content;
                 postanc.CreatedDate = System.DateTime.Now;
                 blog.Comments.Add(postanc);
                 blog.SaveChanges();
-                return RedirectToAction("SaveComment");
+                return RedirectToAction("Details", postId);
 
             }
             return View();

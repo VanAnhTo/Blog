@@ -1,9 +1,9 @@
 ﻿@model Blog.Models.CommentModels
 
 
-
-    <form role="form" class="clearfix" action="SaveComment" method="post">
-        <div class="form-group">
+    <form role="form" class="clearfix" action="/Post/SaveComment" method="post">   
+       @Html.HiddenFor(model => model.postId)
+         <div class="form-group">
             @Html.LabelFor(model => model.userId, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.userId)
