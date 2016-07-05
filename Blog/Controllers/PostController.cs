@@ -332,7 +332,7 @@ namespace Blog.Controllers
                 postanc.CreatedDate = System.DateTime.Now;
                 blog.Comments.Add(postanc);
                 blog.SaveChanges();
-                return RedirectToAction("Details", postId);
+                return RedirectToAction("Details");
 
             }
             return View();
