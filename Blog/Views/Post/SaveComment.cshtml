@@ -1,28 +1,62 @@
 ﻿@model Blog.Models.CommentModels
 
 
-    <form role="form" class="clearfix" action="/Post/SaveComment" method="post">   
-       @Html.HiddenFor(model => model.postId)
-         <div class="form-group">
-            @Html.LabelFor(model => model.userId, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.userId)
-                @Html.ValidationMessageFor(model => model.userId)
-            </div>
+<form role="form" class="clearfix" action="/Post/SaveComment" method="post">
+    @Html.HiddenFor(model => model.postId)
+    <div class="form-group">
+        @Html.LabelFor(model => model.userId, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.userId)
+            @Html.ValidationMessageFor(model => model.userId)
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.content, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.content)
-                @Html.ValidationMessageFor(model => model.content)
-            </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.content, new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.TextAreaFor(model => model.content)
+            @Html.ValidationMessageFor(model => model.content)
         </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Luu comment" class="btn btn-default" />
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="btncomments" type="submit" value="Luu comment" class="btn btn-default" />
         </div>
- </form>
+    </div>
+</form>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#btncomments").click(function () {
+                $.ajax(
+               {
+                   type: "POST", //HTTP POST Method
+                   url: "/Post/SaveComment", // Controller/View
+                   data: { //Passing data
+
+                       userID: $("#userId").val(), //Reading text box values using Jquery
+
+                       content: $("#content").val()
+                   }
+
+               });
+                var dt = new Date();
+                var time = dt.getDate() + '/' + dt.getMonth() + '/' + dt.getFullYear() + ': ' + dt.getHours() + ":" + dt.getMinutes();
+
+                var comment = $('<div class = "clearfix" id ="subcomment"><h4>' + $('input#userId').val() + '</h4></div> \ <p class ="pull-right">' + time + '</p> \ <p><em>' + $('textarea#content').val() + '</em></p>');
+                $('li#content').append(comment);
+
+            });
+        });
+
+    </script>
+}
+
+
+
+
+
 
 
 
