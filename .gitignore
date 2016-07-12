@@ -46,3 +46,10 @@ Network Trash Folder
 Temporary Items
 .apdisk
 Blog/Views/Shared/_Comments.cshtml
+*.suo
+Blog.v12.suo
+*.pdb
+Blog/obj/Debug/Blog.dll
+*.pdb
+Blog/bin/Blog.pdb
+*.dll
